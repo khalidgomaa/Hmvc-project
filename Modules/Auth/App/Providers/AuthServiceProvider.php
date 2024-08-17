@@ -7,6 +7,9 @@ use Illuminate\Support\ServiceProvider;
 use Modules\Auth\Repositories\MangerAuthRepository;
 use Modules\Auth\Repositories\MangerAuthRepositoryInterface;
 
+use Modules\Auth\Repositories\User\UserRepository;
+use Modules\Auth\Repositories\User\UserRepositoryInterface;
+
 class AuthServiceProvider extends ServiceProvider
 {
     protected string $moduleName = 'Auth';
@@ -25,6 +28,7 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerViews();
         $this->loadMigrationsFrom(module_path($this->moduleName, 'Database/migrations'));
         $this->app->bind(MangerAuthRepositoryInterface::class, MangerAuthRepository::class);
+        $this->app->bind(UserRepositoryInterface::class, UserRepository::class);
 
     }
 

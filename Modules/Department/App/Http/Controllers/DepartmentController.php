@@ -13,17 +13,17 @@ use Modules\Employee\Repositories\EmployeeRepositoryInterface;
 
 class DepartmentController extends Controller
 {
-    protected $DepartmentRepo;
-    protected $EmployeeRepo;
+    protected $departmentRepo;
+    protected $employeeRepo;
 
-    public function __construct(DepartmentRepositoryInterface $DepartmentRepo, EmployeeRepositoryInterface $EmployeeRepo) {
-        $this->DepartmentRepo = $DepartmentRepo;
-        $this->EmployeeRepo = $EmployeeRepo;
+    public function __construct(DepartmentRepositoryInterface $departmentRepo, EmployeeRepositoryInterface $employeeRepo) {
+        $this->departmentRepo = $departmentRepo;
+        $this->employeeRepo = $employeeRepo;
     }
     public function index()
     {
-        $managers = $this->EmployeeRepo->getAllEmployees();
-        $departments = $this->DepartmentRepo->getAllDepartment();
+        $managers = $this->employeeRepo->getAllEmployees();
+        $departments = $this->departmentRepo->getAllDepartment();
         return view('department::index', compact('departments', 'managers'));
     }
 
@@ -32,7 +32,7 @@ class DepartmentController extends Controller
      */
     public function create()
     {
-        $managers = $this->EmployeeRepo->getAllEmployees();
+        $managers = $this->employeeRepo->getAllEmployees();
         return view('department::create',compact( 'managers'));
     }
 
@@ -45,7 +45,7 @@ class DepartmentController extends Controller
             try {
                 $validatedData = $request->validated();
         
-                $this->DepartmentRepo->createDepartment($validatedData);   
+                $this->departmentRepo->createDepartment($validatedData);   
                 session()->flash('success', 'Department created successfully.');
         
                 return redirect()->route('department.index');
@@ -71,9 +71,10 @@ class DepartmentController extends Controller
      */
     public function edit($id)
     {
-        $department = $this->DepartmentRepo->getDepartmentById($id);
-        $departments = $this->DepartmentRepo->getAllDepartmentsWithManagers(); 
-        return view('department::edit', compact('department', 'departments'));
+        $managers = $this->employeeRepo->getAllEmployees();
+        $department = $this->departmentRepo->getDepartmentById($id);
+  
+        return view('department::edit', compact('department', 'managers'));
     }
 
     /**
@@ -84,7 +85,7 @@ class DepartmentController extends Controller
         try {
             $validatedData = $request->validated();
     
-            $updateResult = $this->DepartmentRepo->updateDepartment($id, $validatedData);
+            $updateResult = $this->departmentRepo->updateDepartment($id, $validatedData);
     
             if ($updateResult) {
                 session()->flash('success', 'Department updated successfully.');
@@ -107,7 +108,7 @@ class DepartmentController extends Controller
     {
         try {
 
-            $this->DepartmentRepo->deleteDepartment($id);
+            $this->departmentRepo->deleteDepartment($id);
             
             session()->flash('success', 'Department deleted successfully.');
             return redirect()->route('departments.index');

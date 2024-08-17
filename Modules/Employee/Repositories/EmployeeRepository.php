@@ -9,7 +9,8 @@ class EmployeeRepository implements EmployeeRepositoryInterface
 {
     public function getAllEmployees()
     {
-        return Employee::all();
+      
+         return Employee::with(['user', 'department', 'manger'])->paginate(10);
     }
 
     public function getEmployeeById($id)

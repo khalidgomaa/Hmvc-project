@@ -56,9 +56,9 @@
                                     <label for="manager_id">Manager</label>
                                     <select name="manager_id" id="manager_id" class="form-control">
                                         <option value="">None</option>
-                                        @foreach($employees as $employee)
-                                            <option value="{{ $employee->id }}" {{ $employee->id == $department->manager_id ? 'selected' : '' }}>
-                                                {{ $employee->first_name }} {{ $employee->last_name }}
+                                        @foreach($managers as $manager)
+                                            <option value="{{ $manager->id }}" {{ $manager->id == $department->manager_id ? 'selected' : '' }}>
+                                                {{ $manager->first_name }} {{ $manager->last_name }}
                                             </option>
                                         @endforeach
                                     </select>
@@ -90,8 +90,8 @@
         var element = $(this);
         $('button[type=submit]').prop('disabled', true);
         $.ajax({
-            type: "POST",
-            url : '{{ route("department.update") }}',
+            type: "PUT",
+            url:'{{ route("department.update","$department->id") }}',
             data : element.serializeArray(),
             datatype: 'json',
             success : function(response){
@@ -117,13 +117,6 @@
         });
     });
     
-    // Code for generating slug automatically (if needed)
-    $("#name").change(function(event) {
-        event.preventDefault();
-        var element = $(this);
-        var title = element.val(); 
-        $('button[type=submit]').prop('disabled', true);
-        // Add slug generation logic here if needed
-    });
+    
 </script>
 @endsection

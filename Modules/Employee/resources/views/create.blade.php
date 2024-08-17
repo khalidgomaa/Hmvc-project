@@ -77,9 +77,9 @@
                                     <label for="department_id">Department</label>
                                     <select name="department_id" id="department_id" class="form-control" required>
                                         <!-- Populate options dynamically -->
-                                        {{-- @foreach($departments as $department)
+                                       @foreach($departments as $department)
                                             <option value="{{ $department->id }}">{{ $department->name }}</option>
-                                        @endforeach --}}
+                                        @endforeach 
                                     </select>
                                     <p class="error"></p>
                                 </div>
@@ -91,10 +91,10 @@
                                     <label for="manager_id">Manager</label>
                                     <select name="manager_id" id="manager_id" class="form-control">
                                         <option value="">None</option>
-                                        <!-- Populate options dynamically -->
-                                        {{-- @foreach($employees as $employee)
+                                       <!-- Populate options dynamically -->
+                                         @foreach($employees as $employee)
                                             <option value="{{ $employee->id }}">{{ $employee->first_name }} {{ $employee->last_name }}</option>
-                                        @endforeach --}}
+                                        @endforeach 
                                     </select>
                                     <p class="error"></p>
                                 </div>
@@ -104,9 +104,9 @@
                                 <label for="user_id">User</label>
                                 <select name="user_id" id="user_id" class="form-control" required>
                                     <!-- Populate options dynamically -->
-                                    {{-- @foreach($users as $user)
+                                   @foreach($users as $user)
                                         <option value="{{ $user->id }}">{{ $user->name }}</option>
-                                    @endforeach --}}
+                                    @endforeach
                                 </select>
                                 <p class="error"></p>
                             </div>
