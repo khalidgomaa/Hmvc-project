@@ -1,0 +1,7 @@
+{
+    "Auth": true,
+    "Employee": true,
+    "Department": true,
+    "Task": true
+   
+}
