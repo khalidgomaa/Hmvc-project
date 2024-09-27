@@ -6,7 +6,7 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>My Cash Task</h1>
+                <h1>TaskGrid Task</h1>
             </div>
             <div class="col-sm-6">
                 <!-- Additional header content (if needed) -->
@@ -30,7 +30,7 @@
             </div>
         </div>
     </section>
-    
+
     <!-- Main content -->
     <section class="content">
         <!-- Default box -->
@@ -38,7 +38,7 @@
             <form action="" method="POST" id="departmentForm" name="departmentForm">
                 @csrf
                 @method('PUT') <!-- Indicate that this is an update request -->
-                
+
                 <div class="card">
                     <div class="card-body">
                         <div class="row">
@@ -49,7 +49,7 @@
                                     <p></p>
                                 </div>
                             </div>
-                            
+
                             <div class="col-md-6">
                                 <!-- Manager -->
                                 <div class="mb-3">
@@ -68,7 +68,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="pb-5 pt-3">
                     <button type="submit" class="btn btn-primary">Update</button>
                     <a href="{{ route('department.index') }}" class="btn btn-outline-dark ml-3">Cancel</a>
@@ -107,7 +107,7 @@
                     } else {
                         $("#name").removeClass('is-invalid')
                             .siblings('p').removeClass('invalid-feedback')
-                            .html(errors['']); 
+                            .html(errors['']);
                     }
                 }
             },
@@ -116,7 +116,7 @@
             }
         });
     });
-    
-    
+
+
 </script>
 @endsection

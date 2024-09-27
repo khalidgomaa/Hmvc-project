@@ -6,7 +6,7 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>My Cash Task</h1>
+                <h1>TaskGrid Task</h1>
             </div>
             <div class="col-sm-6">
 
@@ -127,13 +127,13 @@
     });
 });
 
-                   
-               
 
 
 
 
-       
+
+
+
 
 </script>
 @endsection

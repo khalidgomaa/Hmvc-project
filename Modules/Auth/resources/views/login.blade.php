@@ -5,15 +5,15 @@
     <div class="card card-outline card-primary">
 
         <div class="card-header text-center">
-            <a href="#" class="h3">My Cash Task Panel</a>
+            <a href="#" class="h3">TaskGrid Task Panel</a>
         </div>
         <div class="card-body">
             <p class="login-box-msg">Sign in to start your session</p>
             <form action="{{route('manger.authenticate')}}" method="post">
                 @csrf
-             
+
                 <div class="input-group mb-3">
-                    <input type="email"name="email" id="email" value="{{ old('email') }}" class="form-control  @error('email') is-invalid @enderror" 
+                    <input type="email"name="email" id="email" value="{{ old('email') }}" class="form-control  @error('email') is-invalid @enderror"
                     placeholder="Email">
                     <div class="input-group-append">
                         <div class="input-group-text">

@@ -10,7 +10,6 @@ interface EmployeeRepositoryInterface
 
     public function createEmployee(array $data);
  
-
     public function updateEmployee($id, array $data);
 
     public function deleteEmployee($id);

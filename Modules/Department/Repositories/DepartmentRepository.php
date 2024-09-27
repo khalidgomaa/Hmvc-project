@@ -10,12 +10,12 @@ use Modules\Employee\Repositories\EmployeeRepositoryInterface;
 class DepartmentRepository implements DepartmentRepositoryInterface
 {
 
-  
+
 
     public function __construct() {
-       
+
     }
-    public function getAllDepartment()
+    public function getAllDepartments()
     {
 
         return Department::with('manager')->paginate(10);

@@ -5,7 +5,7 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>My Cash Task</h1>
+                <h1>TaskGrid Task</h1>
             </div>
             <div class="col-sm-6">
 
@@ -79,12 +79,12 @@
                                         <!-- Populate options dynamically -->
                                        @foreach($departments as $department)
                                             <option value="{{ $department->id }}">{{ $department->name }}</option>
-                                        @endforeach 
+                                        @endforeach
                                     </select>
                                     <p class="error"></p>
                                 </div>
                             </div>
-    
+
                             <div class="col-md-4">
                                 <!-- Manager -->
                                 <div class="mb-3">
@@ -94,7 +94,7 @@
                                        <!-- Populate options dynamically -->
                                          @foreach($employees as $employee)
                                             <option value="{{ $employee->id }}">{{ $employee->first_name }} {{ $employee->last_name }}</option>
-                                        @endforeach 
+                                        @endforeach
                                     </select>
                                     <p class="error"></p>
                                 </div>
@@ -110,7 +110,7 @@
                                 </select>
                                 <p class="error"></p>
                             </div>
-                            
+
                         </div>
                     </div>
                     </div>
@@ -165,31 +165,31 @@
         });
     });
 
-            
 
 
-            
+
+
 
              Dropzone.autoDiscover = false;
               /**
      * Setup dropzone
      */
     const dropzone = $('#image').dropzone({
-        init: function() 
+        init: function()
         {
             // myDropzone = this;
 
             // when file is dragged in
-            this.on('addedfile', function(file) { 
+            this.on('addedfile', function(file) {
                 if(this.files.length>1){
                         // this.removeFile(this.files[0]);
                 }
             });
         },
-       
+
         url: "{{ route('temp-image.create') }}",
         addRemoveLinks: true,
-        
+
         parallelUploads: 1,
         maxFiles: 1,
         paramName: 'image',
@@ -198,8 +198,8 @@
         headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
-    
-        success: function(file, response) 
+
+        success: function(file, response)
         {
         $("#image_id").val(response.image_id)
         }

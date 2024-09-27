@@ -4,7 +4,7 @@ namespace Modules\Department\Repositories;
 
 interface DepartmentRepositoryInterface
 {
-    public function getAllDepartment();
+    public function getAllDepartments();
 
     public function getDepartmentById($id);
 

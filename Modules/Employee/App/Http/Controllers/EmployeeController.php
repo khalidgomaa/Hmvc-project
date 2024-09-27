@@ -4,13 +4,15 @@ namespace Modules\Employee\App\Http\Controllers;
 
 
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Modules\Employee\App\Models\TempImage;
 use Modules\Auth\Repositories\User\UserRepositoryInterface;
-use Modules\Department\Repositories\DepartmentRepositoryInterface;
 use Modules\Employee\App\Http\Requests\StoreEmployeeRequest;
 use Modules\Employee\App\Http\Requests\UpdateEmployeeRequest;
 use Modules\Employee\Repositories\EmployeeRepositoryInterface;
+use Modules\Department\Repositories\DepartmentRepositoryInterface;
+use Illuminate\Support\Facades\File;
 
 
 class EmployeeController extends Controller {
@@ -34,8 +36,6 @@ class EmployeeController extends Controller {
     }
 
 
-
-
     public function create() {
         $users = $this->userRepo->getAllUsers();
         $employees = $this->employeeRepo->getAllEmployees();
@@ -48,20 +48,19 @@ class EmployeeController extends Controller {
     public function store(StoreEmployeeRequest $request)
     {
         try {
-            // Create employee and get the instance
             $employee = $this->employeeRepo->createEmployee($request->validated());
-    
+
             // Handle image if provided
             if (!empty($request->image_id)) {
                 $this->handleImage($request->image_id, $employee);
             }
-    
+
             return redirect()->route('employee::index')->with('status', 'Employee added successfully!');
         } catch (\Exception $e) {
             return redirect()->back()->withErrors(['error' => 'Unable to add employee.']);
         }
     }
-    
+
 
 
 
@@ -81,32 +80,32 @@ class EmployeeController extends Controller {
 
     public function update(UpdateEmployeeRequest $request, $id) {
         try {
-      
+
             $users= $this->userRepo->getAllUsers();
             $employees= $this->employeeRepo->getAllEmployees();
-          
-            $users= $this->departmentRepo->getAllDepartment();
+
+            $users= $this->departmentRepo->getAllDepartments();
 
             $validatedData = $request->validated();
 
             $employee = $this->employeeRepo->updateEmployee($id, $validatedData);
-        
+
             if (!$employee) {
                 return redirect()->route('employee::index')->withErrors(['error' => 'Employee not found.']);
             }
             if (!empty($request->image_id)) {
                 $this->handleImage($request->image_id, $employee);
             }
-            $this->employeeRepo->editEmployee($id);
+            $this->employeeRepo->updateEmployee($id);
             return redirect()->route('employee::create');
         } catch (\Exception $e) {
-    
+
             return redirect()->back()->withErrors(['error' => 'Unable to update employee.']);
         }
     }
 
- 
-    
+
+
 
     public function delete($id) {
         try {
@@ -117,10 +116,10 @@ class EmployeeController extends Controller {
             }
             $this->employeeRepo->deleteEmployee($id);
             return redirect()->route('employee::index')->with('status', 'Employee deleted successfully!');
-      
-      
+
+
         } catch (\Exception $e) {
-     
+
             return redirect()->route('employee::index')->withErrors(['error' => 'Unable to delete employee.']);
         }
     }
